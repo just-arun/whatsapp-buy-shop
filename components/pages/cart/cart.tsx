@@ -9,7 +9,7 @@ export const CartPage = () => {
 	const getItem = (id: any): any => state.getOne(id)
 	return (
 		<section className="text-gray-600 body-font">
-			<div className="p-4 -m-4 text-center">
+			<div className="p-4  text-center">
 				<h1 className='my-5 font-bold text-xl text-center'>Your Cart</h1>
 			</div>
 			<div className="container px-5 py-10 mx-auto flex flex-wrap">
