@@ -1,7 +1,8 @@
 export const Footer = () => <footer
-	className='p-5'
+	className='p-5 py-25'
 	style={{
 		textAlign: 'center',
+		padding: '100px 0px'
 	}}
 >
 	<a
