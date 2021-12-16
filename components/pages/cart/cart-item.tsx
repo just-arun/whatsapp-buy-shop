@@ -19,7 +19,7 @@ export const CartItem: FC<CartItemProps> = (props) => {
 			<div className="flex-grow">
 				<h2 className="text-gray-900 text-lg title-font font-medium mb-3">{props.data.name}</h2>
 				<p className="leading-relaxed text-base">
-					{String(props.data.description).slice(0, 120)}
+					{String(props.data.description).slice(0, 30)}
 				</p>
 				<a className="mt-1 font-bold inline-flex items-center">
 					Price: {InRs(props.data.price * props.qty)}
