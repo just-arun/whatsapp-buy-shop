@@ -104,7 +104,7 @@ const GlobalState = () => {
 				return el;
 			})
 			newData.forEach(el => {
-				message += `\nname: ${el.data.name}\ndescription: ${el.data.description}\nqty: ${el.qty}\nTotal: ${el.total}\nlink: ${window.location.protocol}//${window.location.host}/detail?id=${el.id}`;
+				message += `\nname: ${el.data.name}\ndescription: ${el.data.description}\nqty: ${el.qty}\nTotal: ${el.total}\nlink: ${window.location.protocol}//${window.location.host}/product?id=${el.id}`;
 			})
 			message += `\nGrand Total: ${InRs(total)}`
 		}
@@ -118,7 +118,7 @@ const GlobalState = () => {
 		let message = `Hi ${process.env.NAME} i would like to by the following product,`;
 		let data = getOne(id);
 		if (!!data) {
-			message += `\nname: ${data.name}\ndescription: ${data.description}\nqty: ${1}\nTotal: ${data.price}\nlink: ${window.location.protocol}//${window.location.host}/detail?id=${id}`;
+			message += `\nname: ${data.name}\ndescription: ${data.description}\nqty: ${1}\nTotal: ${data.price}\nlink: ${window.location.protocol}//${window.location.host}/product?id=${id}`;
 			message += `\nGrand Total: ${InRs(data.price)}`
 		} else {
 			return
