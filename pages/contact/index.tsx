@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { CsvToJson } from "../../helpers";
 
+import Head from 'next/head'
 
 const Contact: NextPage = () => {
     const [data, setData] = useState([] as { type: string, value: any }[])
@@ -31,6 +32,11 @@ const Contact: NextPage = () => {
     }
     return (
         <div className='container mx-auto'>
+            <Head>
+                <title>Show Online</title>
+                <meta name="description" content="sell, buy products online with your progressive web app which helps you reach you client easier" />
+                <link rel="icon" href="/ico.svg" />
+            </Head>
             <div className='-m-4 p-5 container mx-auto'>
                 <h1 className='text-xl font-bold'>Contact</h1>
                 <table style={{

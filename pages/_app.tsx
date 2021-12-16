@@ -1,8 +1,8 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
 import { GlobalStateStore } from '../stores'
 import { DefaultLayout } from '../components/layouts'
 import { SearchLayout } from '../components/layouts/search'
+import { Head } from 'next/document'
 
 function MyApp({ Component, pageProps }: any) {
  

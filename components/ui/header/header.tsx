@@ -24,7 +24,7 @@ export const Header = () => {
 				<div className="flex title-font font-medium items-center text-gray-900 md:mb-0">
 					<Link href="/">
 						<a>
-							<img src="https://www.iconpacks.net/icons/2/free-shopping-bag-icon-2041-thumb.png" 
+							<img src="/ico.svg" 
 							height="34"
 							width="34"
 							alt="" />
