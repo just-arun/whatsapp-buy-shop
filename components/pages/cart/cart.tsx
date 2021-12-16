@@ -15,7 +15,7 @@ export const CartPage = () => {
 			<div className="container px-5 py-10 mx-auto flex flex-wrap">
 				<div className="flex flex-wrap -m-4">
 					{state.cart.map((e, i) => (
-						<div className="p-4 lg:w-1/2 md:w-full" key={i}>
+						<div className="p-4 lg:w-1/2 md:w-full" style={{width: '100%'}} key={i}>
 							{state.getOne(e.id) && <CartItem qty={e.qty}
 								delete={() => state.removeFromCart(e.id)}
 								addQty={() => state.addToCart(e.id)}
