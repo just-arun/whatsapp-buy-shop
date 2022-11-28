@@ -4,15 +4,21 @@ import { useEffect, useState } from "react";
 import { CsvToJson } from "../../helpers";
 
 import Head from 'next/head'
+import { LoaderWrapper } from "../../components/ui/loaders/loader-wrapper";
+import { OrderLoader } from "../../components/ui/loaders/orbit";
 
 const Contact: NextPage = () => {
     const [data, setData] = useState([] as { type: string, value: any }[])
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
+        setLoading(true)
         axios.get(`${process.env.CONTACT_URL}`)
             .then(res => {
                 setData(CsvToJson(res.data).body)
+                setLoading(false)
             }).catch(err => {
                 console.log(err);
+                setLoading(false)
             })
     }, [])
     const typeAction = (type: string, value: any) => {
@@ -37,7 +43,9 @@ const Contact: NextPage = () => {
                 <meta name="description" content="sell, buy products online with your progressive web app which helps you reach you client easier" />
                 <link rel="icon" href="/ico.svg" />
             </Head>
-            <div className='-m-4 p-5 container mx-auto'>
+            {loading ?
+				<LoaderWrapper><OrderLoader /></LoaderWrapper>
+            : <div className='-m-4 p-5 container mx-auto'>
                 <h1 className='text-xl font-bold'>Contact</h1>
                 <table style={{
                     width: '100%'
@@ -51,7 +59,7 @@ const Contact: NextPage = () => {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </div>}
         </div>
     )
 }

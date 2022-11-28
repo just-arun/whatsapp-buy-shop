@@ -4,6 +4,8 @@ import { ProductPage } from "../../components/pages/product"
 import { ProductGrid } from "../../components/ui/product-grid/product-grid"
 
 import Head from 'next/head'
+import { LoaderWrapper } from "../../components/ui/loaders/loader-wrapper"
+import { OrderLoader } from "../../components/ui/loaders/orbit"
 
 
 const Product: NextPage<{ id: any }> = ({ id }) => {
@@ -24,7 +26,7 @@ const Product: NextPage<{ id: any }> = ({ id }) => {
 					: <div>
 						404 not fund
 					</div> : <div>
-					loading...
+					<LoaderWrapper><OrderLoader /></LoaderWrapper>
 				</div>}
 		</div>
 	)
