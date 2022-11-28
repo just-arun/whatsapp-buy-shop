@@ -12,6 +12,7 @@ export type CartItem = {
 const GlobalState = () => {
 	const [data, setData] = useState([] as ProductCardProps[])
 	const [search, setSearch] = useState("");
+	const [loading, setLoading] = useState(false);
 	const computedData = useMemo(() => {
 		let keys = ['name', 'brand']
 		return data.filter((e: any) => {
@@ -28,13 +29,16 @@ const GlobalState = () => {
 		return data.find((e) => e.id == id);
 	}
 	const init = () => {
+		setLoading(true)
 		axios.get
 			(`${process.env.PRODUCT_URL}`)
 			.then(res => {
 				let da = CsvToJson(res.data)
 				setData(da.body);
+				setLoading(false)
 			}).catch(err => {
 				console.error(err);
+				setLoading(false)
 			})
 	}
 	const [cart, setCart] = useState([] as CartItem[]);
@@ -136,7 +140,7 @@ const GlobalState = () => {
 		return total
 	}, [cart, data])
 
-	return { cartTotal, buyNow, checkout, computedData, cart, setCart, filterItemsBasedOnKey, cartItemCount, init, search, setSearch, data, inCart, getOne, addToCart, removeFromCart, decreaseCartCunt }
+	return { cartTotal, buyNow, checkout, computedData, cart, setCart, filterItemsBasedOnKey, cartItemCount, init, search, setSearch, data, inCart, getOne, addToCart, removeFromCart, decreaseCartCunt, loading }
 }
 
 export const GlobalStateStore = createContainer(GlobalState);
