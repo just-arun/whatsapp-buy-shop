@@ -2,6 +2,8 @@ import { FC } from "react"
 import { InRs } from "../../helpers"
 import { GlobalStateStore } from "../../stores"
 import { ProductCardProps } from "../ui/card/product-card"
+import { LoaderWrapper } from "../ui/loaders/loader-wrapper"
+import { OrderLoader } from "../ui/loaders/orbit"
 
 type ProductPageProps = {
 	data?: ProductCardProps
@@ -69,9 +71,8 @@ export const ProductPage: FC<ProductPageProps> = (_props) => {
 					</div>
 				</div>
 			</section>
-			: <section>
-				loading...
-			</section>
+			:
+			<LoaderWrapper><OrderLoader /></LoaderWrapper>
 	)
 
 }
