@@ -18,3 +18,25 @@ export const CsvToJson = (arg: string) => {
     })
     return { header, body }
 }
+
+export const ParseDataV1 = (response: string) => {
+    let strData = String(response)
+        .replace("google.visualization.Query.setResponse(", "")
+        .replace("/*O_o*/", "")
+        .replace(');', '')
+    let parsData = JSON.parse(strData)
+    if (parsData.table) {
+        console.log(parsData.table);
+        let cols: any[] = parsData.table.cols.filter((e: any) => !!e.label).map((e: any, i: any) => e.label)
+        let rows: any[] = parsData.table.rows.map((e: any) => {
+            let c = e.c
+            let newVal: any = {}
+            cols?.forEach((el: any, i: number) => {
+                newVal[el] = !!c[i] ? c[i].v : ""
+            })
+            return newVal
+        })
+        return {rows, cols};
+    }
+    return false
+}

@@ -8,7 +8,7 @@ export type ProductCardProps = {
     description: string;
     price: any;
     ratings: any;
-    brand: string;
+    category: string;
     image: string
 }
 
@@ -24,8 +24,8 @@ export const ProductCard: FC<ProductCardProps> = (_props) => {
                 </a>
             </Link>
             <div className="mt-4">
-                <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{_props.brand}</h3>
-                <h2 className="text-gray-900 title-font text-lg font-medium">{_props.name}</h2>
+                <h2 className="text-gray-900 title-font text-lg font-medium overflow-hidden truncate w-full">{_props.name}</h2>
+                <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{_props.category}</h3>
                 <p className="mt-1">{InRs(_props.price)}</p>
             </div>
         </div>

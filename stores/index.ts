@@ -2,19 +2,23 @@ import { useEffect, useMemo, useState } from "react"
 import { createContainer } from "unstated-next"
 import axios from 'axios'
 import { ProductCardProps } from "../components/ui/card/product-card"
-import { CsvToJson, InRs } from "../helpers"
+import { CsvToJson, InRs, ParseDataV1 } from "../helpers"
+import { Config } from "../config"
 
 export type CartItem = {
 	id: any,
 	qty: any,
 }
 
+export const SheetLink = (id: string, sheet: string) =>
+	`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:json&gid=${sheet}`
+
 const GlobalState = () => {
 	const [data, setData] = useState([] as ProductCardProps[])
 	const [search, setSearch] = useState("");
 	const [loading, setLoading] = useState(false);
 	const computedData = useMemo(() => {
-		let keys = ['name', 'brand']
+		let keys = ['name', 'category']
 		return data.filter((e: any) => {
 			return keys.map(
 				(el: any) => String(e[el]).toLowerCase()
@@ -30,16 +34,19 @@ const GlobalState = () => {
 	}
 	const init = () => {
 		setLoading(true)
-		axios.get
-			(`${process.env.PRODUCT_URL}`)
-			.then(res => {
-				let da = CsvToJson(res.data)
-				setData(da.body);
+		axios.get(SheetLink(Config.SHEET, Config.PRODUCT)).then(re => {
+			console.log("data");
+			const resp = ParseDataV1(re.data)
+			if (!!resp) {
+				setData(resp.rows);
 				setLoading(false)
-			}).catch(err => {
-				console.error(err);
-				setLoading(false)
-			})
+				console.log(resp.rows);
+			}
+			setLoading(false)
+		}).catch(err => {
+			console.error(err);
+			setLoading(false)
+		})
 	}
 	const [cart, setCart] = useState([] as CartItem[]);
 	const addToCart = (id: any) => {
@@ -140,7 +147,23 @@ const GlobalState = () => {
 		return total
 	}, [cart, data])
 
-	return { cartTotal, buyNow, checkout, computedData, cart, setCart, filterItemsBasedOnKey, cartItemCount, init, search, setSearch, data, inCart, getOne, addToCart, removeFromCart, decreaseCartCunt, loading }
+	const availableCatagories: string[] = useMemo(() => {
+		let val: string[] = [];
+		data.forEach((e) => {
+			if (!val.includes(e.category)) {
+				val.push(String(e.category));
+			}
+		})
+		return val
+	}, [data])
+
+	const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+
+	const clearCategory = () => {
+		setSelectedCategory([]);
+	}
+
+	return { clearCategory, setSelectedCategory, selectedCategory, cartTotal, buyNow, checkout, computedData, cart, setCart, filterItemsBasedOnKey, cartItemCount, init, search, setSearch, data, inCart, getOne, addToCart, removeFromCart, decreaseCartCunt, loading, availableCatagories }
 }
 
 export const GlobalStateStore = createContainer(GlobalState);

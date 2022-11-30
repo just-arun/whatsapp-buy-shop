@@ -4,6 +4,7 @@ import { GlobalStateStore } from "../../stores";
 import Head from 'next/head'
 import { LoaderWrapper } from "../../components/ui/loaders/loader-wrapper";
 import { OrderLoader } from "../../components/ui/loaders/orbit";
+import { CategoryTabs } from "../../components/ui/category/category";
 
 const Search = () => {
     const state = GlobalStateStore.useContainer()
@@ -15,7 +16,11 @@ const Search = () => {
                 <link rel="icon" href="/ico.svg" />
             </Head>
             {!state.loading ?
-                <ProductGrid data={state.computedData} /> : <LoaderWrapper><OrderLoader /></LoaderWrapper>}
+                <div>
+                    <CategoryTabs />
+                    <ProductGrid data={state.computedData} filters={state.selectedCategory} />
+                </div>
+                : <LoaderWrapper><OrderLoader /></LoaderWrapper>}
         </div>
     )
 }

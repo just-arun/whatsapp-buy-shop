@@ -21,7 +21,7 @@ const Product: NextPage<{ id: any }> = ({ id }) => {
 				!!state.getOne(id) ? <div className='container mx-auto'>
 					<ProductPage data={state.getOne(id)} />
 					<div className='text-xl bolder'>Similar Products</div>
-					<ProductGrid data={state.filterItemsBasedOnKey("brand", `${state.getOne(id)?.brand}`)} />
+					<ProductGrid filters={[]} data={state.filterItemsBasedOnKey("category", `${state.getOne(id)?.category}`)} />
 				</div>
 					: <div>
 						404 not fund

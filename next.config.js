@@ -11,7 +11,8 @@ module.exports = {
   env: {
     NAME: process.env.NAME,
     MOBILE_NO: process.env.MOBILE_NO,
-    PRODUCT_URL: process.env.PRODUCT_URL,
-    CONTACT_URL: process.env.CONTACT_URL,
+    SHEET: process.env.SHEET,
+    PRODUCT: process.env.PRODUCT,
+    CONTACT: process.env.CONTACT,
   }
 }
